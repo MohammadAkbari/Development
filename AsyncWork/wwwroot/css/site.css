@@ -54,3 +54,9 @@ body {
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.holder {
+    padding: 1.5rem;
+    border-width: .2rem;
+    border: solid #f8f9fa;
+}

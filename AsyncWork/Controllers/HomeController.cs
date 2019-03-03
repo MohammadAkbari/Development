@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using AsyncWork.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace AsyncWork.Controllers
 {
@@ -15,15 +9,17 @@ namespace AsyncWork.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult Test(TestDto dto)
         {
-            return View();
+            return Ok();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public class TestDto
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            public int Id { get; set; }
+
+            public string Name { get; set; }
         }
     }
 }
