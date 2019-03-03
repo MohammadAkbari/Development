@@ -9,6 +9,4 @@ namespace DependencyInjectionWork.Controllers
             return View();
         }
     }
-
-
 }
