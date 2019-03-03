@@ -10,7 +10,9 @@ namespace AsyncWork
         public static void Main(string[] args)
         {
             int logicalProcessorCount = Environment.ProcessorCount;
-            bool success = ThreadPool.SetMaxThreads(logicalProcessorCount, logicalProcessorCount);
+            bool success = ThreadPool.SetMaxThreads(workerThreads: logicalProcessorCount, completionPortThreads: logicalProcessorCount);
+
+            ThreadPool.SetMaxThreads(4, 4);
 
             //ThreadPool.GetAvailableThreads(out int wt, out int iot);
 
