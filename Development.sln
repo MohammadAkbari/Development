@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncWork", "AsyncWork\AsyncWork.csproj", "{287CD94C-AF09-4BF5-9957-C95295CA204C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncWork", "AsyncWork\AsyncWork.csproj", "{287CD94C-AF09-4BF5-9957-C95295CA204C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjectionWork", "DependencyInjectionWork\DependencyInjectionWork.csproj", "{E49B3874-3658-4812-B663-63A24ADEBC75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInjectionWork", "DependencyInjectionWork\DependencyInjectionWork.csproj", "{E49B3874-3658-4812-B663-63A24ADEBC75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlWork", "XmlWork\XmlWork.csproj", "{6BA07A83-D47B-4E40-BA22-B102202A76D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E49B3874-3658-4812-B663-63A24ADEBC75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E49B3874-3658-4812-B663-63A24ADEBC75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E49B3874-3658-4812-B663-63A24ADEBC75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BA07A83-D47B-4E40-BA22-B102202A76D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BA07A83-D47B-4E40-BA22-B102202A76D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BA07A83-D47B-4E40-BA22-B102202A76D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BA07A83-D47B-4E40-BA22-B102202A76D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
