@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StackExchange.Redis;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading;
 
@@ -140,6 +142,8 @@ namespace Work
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Event> Events { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Post> Posts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -153,6 +157,32 @@ namespace Work
 
             base.OnModelCreating(modelBuilder);
         }
+    }
+
+    public class Post
+    {
+        public int PostId { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+
+        public string AuthorUserId { get; set; }
+        public User Author { get; set; }
+
+        public string ContributorUserId { get; set; }
+        public User Contributor { get; set; }
+    }
+
+    public class User
+    {
+        public string UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        [InverseProperty(nameof(Post.Author))]
+        public List<Post> AuthoredPosts { get; set; }
+
+        [InverseProperty(nameof(Post.Contributor))]
+        public List<Post> ContributedToPosts { get; set; }
     }
 
     public class Event
