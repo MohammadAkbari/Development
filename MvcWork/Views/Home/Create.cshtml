@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model CreateVm
+
+<div class="text-center">
+    <h1 class="display-4">Create</h1>
+    <form method="post">
+        <label asp-for="PartialType"></label>
+        <input asp-for="PartialType" /> <br>
+
+        <partial name="_PartialVm" for="PartialVm" />
+
+        <label asp-for="Family"></label>
+        <input asp-for="Family" /> <br>
+
+        <button type="submit">Create</button>
+    </form>
+</div>

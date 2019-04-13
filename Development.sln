@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInjectionWork", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlWork", "XmlWork\XmlWork.csproj", "{6BA07A83-D47B-4E40-BA22-B102202A76D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Work", "Work\Work.csproj", "{95AE30DB-C705-4A5E-A8B7-4E5D6DD65909}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Work", "Work\Work.csproj", "{95AE30DB-C705-4A5E-A8B7-4E5D6DD65909}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcWork", "MvcWork\MvcWork.csproj", "{03A57EF1-5514-4551-A8F7-0E97FF2C89B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Job", "Job\Job.csproj", "{EF340319-0023-4D6C-9EE7-16C121AAA28E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{95AE30DB-C705-4A5E-A8B7-4E5D6DD65909}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95AE30DB-C705-4A5E-A8B7-4E5D6DD65909}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95AE30DB-C705-4A5E-A8B7-4E5D6DD65909}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03A57EF1-5514-4551-A8F7-0E97FF2C89B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03A57EF1-5514-4551-A8F7-0E97FF2C89B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03A57EF1-5514-4551-A8F7-0E97FF2C89B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03A57EF1-5514-4551-A8F7-0E97FF2C89B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF340319-0023-4D6C-9EE7-16C121AAA28E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF340319-0023-4D6C-9EE7-16C121AAA28E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF340319-0023-4D6C-9EE7-16C121AAA28E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF340319-0023-4D6C-9EE7-16C121AAA28E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
