@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Query.Expressions;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+using Microsoft.EntityFrameworkCore.Query.Sql;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
@@ -157,15 +160,16 @@ namespace Work
         {
             using (var db = new ApplicationDbContext())
             {
-                AddCampaign(db, 1);
-                AddCampaign(db, 4);
+                //AddCampaign(db, 1);
+                //AddCampaign(db, 4);
 
-                db.SaveChanges();
+                //db.SaveChanges();
 
                 var ts = new TimeSpan(12, 0, 0);
 
                 var list = db.Campaigns.Where(e => e.From.Add(e.Offset) < ts)
                     .Where(e => e.To.Add(e.Offset) > ts)
+                    .WithSqlTweaks()
                     .ToList();
             }
 
@@ -238,7 +242,11 @@ namespace Work
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging();
-            optionsBuilder.UseSqlServer(@"Data Source=.;Initial Catalog=ConsoleDb;Integrated Security=true;TrustServerCertificate=True;MultipleActiveResultSets=true");
+            optionsBuilder
+                .UseSqlServer(@"Data Source=.;Initial Catalog=ConsoleDb;Integrated Security=true;TrustServerCertificate=True;MultipleActiveResultSets=true")
+                .ReplaceService<INodeTypeProviderFactory, CustomMethodInfoBasedNodeTypeRegistryFactory>()
+                .ReplaceService<ISelectExpressionFactory, CustomSelectExpressionFactory>()
+                .ReplaceService<IQuerySqlGeneratorFactory, CustomSqlServerQuerySqlGeneratorFactory>(); ;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -320,8 +328,19 @@ namespace Work
         public DayOfWeek? DayOfWeek { get; set; }
     }
 
+    public class ValueRelation
+    {
+        public int Id { get; set; }
+
+        public string Description { get; set; }
+    }
+
     public class Value
     {
+        public int? ValueRelationId { get; set; }
+
+        public ValueRelation ValueRelation { get; set; }
+
         public string Name { get; set; }
     }
 

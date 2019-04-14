@@ -3,11 +3,13 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Migrations\20190331100802_Change2.cs" />
     <Compile Remove="Migrations\20190406111538_Change5.cs" />
+    <Compile Remove="Migrations\20190414103334_Test1.cs" />
   </ItemGroup>
 
   <ItemGroup>
