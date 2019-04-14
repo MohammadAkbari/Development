@@ -20,6 +20,7 @@ using System.Reflection;
 namespace Work
 {
     //https://www.chasingdevops.com/sql-generation-ef-core/
+    //https://github.com/aspnet/EntityFrameworkCore/blob/master/src/EFCore.SqlServer/Query/Sql/Internal/SqlServerQuerySqlGenerator.cs
 
     public static class IQueryableExtensions
     {
