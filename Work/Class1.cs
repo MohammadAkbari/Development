@@ -149,7 +149,7 @@ namespace Work
                 }
             }
 
-            return null;
+            return base.VisitSelect(selectExpression);
         }
     }
 

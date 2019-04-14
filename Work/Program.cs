@@ -169,7 +169,7 @@ namespace Work
 
                 var list = db.Campaigns.Where(e => e.From.Add(e.Offset) < ts)
                     .Where(e => e.To.Add(e.Offset) > ts)
-                    .WithSqlTweaks()
+                    //.WithSqlTweaks()
                     .ToList();
             }
 
