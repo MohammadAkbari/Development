@@ -51,6 +51,7 @@ namespace Job
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
                 .WriteTo.File(@"C:\Temp\log2.txt")
+                .WriteTo.Seq("http://localhost:5341")
                 .CreateLogger();
 
             services.AddLogging(loggingBuilder =>
@@ -125,9 +126,11 @@ namespace Job
 
         public async Task Execute(IJobExecutionContext context)
         {
-            _logger.LogInformation("Hi");
+            _logger.LogInformation($"Start job at {Environment.CurrentDirectory}");
 
             await Task.CompletedTask;
+
+            _logger.LogInformation($"End job at {Environment.CurrentDirectory}");
         }
     }
 
