@@ -19,6 +19,19 @@ namespace Work
 
         static void Main(string[] args)
         {
+            var t = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
+
+            //2019-04-22T06:00:58.918Z
+
+            var dateTime = new DateTime(2019, 4, 22, 6, 0, 58, 918, DateTimeKind.Utc);
+
+            DateTimeOffset dof = dateTime;
+
+            var x = dof.ToUnixTimeMilliseconds();
+
+
+
             EfSample();
 
             Console.ReadKey();
@@ -100,8 +113,6 @@ namespace Work
 
         private static void AddToRedis(IDatabase redis, int sessionKey, int contentId)
         {
-            var value = redis.StringGet($"session:{sessionKey}:content:{contentId}");
-
             var redisValues = redis.HashGet($"content:{contentId}",
                 new RedisValue[] {
                     "click",
@@ -112,6 +123,10 @@ namespace Work
             int newPrice = (int)redisValues[0];
             string advertiserId = redisValues[1];
             string campaignId = redisValues[2];
+
+
+            var value = redis.StringGet($"session:{sessionKey}:content:{contentId}");
+
 
             var oldPrice = value.HasValue? (int)value : 0;
 
@@ -130,6 +145,10 @@ namespace Work
             var totalSeconds = (long)TimeSpan.FromTicks(now.Ticks).TotalSeconds;
             redis.SortedSetAdd(KEY, sessionKey, totalSeconds);
         }
+
+
+
+
 
         private static void StructVsClass()
         {
