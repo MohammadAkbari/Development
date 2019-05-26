@@ -50,8 +50,8 @@ namespace Job
 
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console()
-                .WriteTo.File(@"C:\Temp\log2.txt")
-                .WriteTo.Seq("http://localhost:5341")
+                //.WriteTo.File(@"C:\Temp\log2.txt")
+                //.WriteTo.Seq("http://localhost:5341")
                 .CreateLogger();
 
             services.AddLogging(loggingBuilder =>
