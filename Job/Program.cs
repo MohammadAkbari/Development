@@ -5,6 +5,7 @@ using Quartz.Impl;
 using Quartz.Spi;
 using Serilog;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Topshelf;
 
@@ -43,7 +44,7 @@ namespace Job
             services.AddTransient<ITrigger>(e => TriggerBuilder.Create()
                 .WithIdentity("Tasks", "Task1")
                 .WithSimpleSchedule(x => x
-                    .WithIntervalInMinutes(1)
+                    .WithIntervalInSeconds(5)
                     .RepeatForever())
                 .StartNow()
                 .Build());
@@ -70,9 +71,14 @@ namespace Job
         public static IServiceCollection AddJobScheduler<TJob>(this IServiceCollection services) where TJob : class, IJob
         {
             services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
-            services.AddTransient<IJobFactory, JobFactory>();
-            services.AddTransient<IJobDetail>(e => JobBuilder.Create<IJob>().Build());
-            services.AddTransient<IJob, TJob>();
+            services.AddSingleton<IJobFactory, SingletonJobFactory>();
+
+            var jobType = typeof(SimpleJob);
+            services.AddTransient<IJobDetail>(e => JobBuilder.Create<TJob>()
+                .WithIdentity(jobType.FullName)
+                .WithDescription(jobType.Name).Build());
+
+            services.AddTransient<TJob>();
 
             services.AddTransient<IScheduler>((provider) =>
             {
@@ -115,6 +121,7 @@ namespace Job
         }
     }
 
+    //[DisallowConcurrentExecution]
     internal class SimpleJob : IJob
     {
         private readonly ILogger<SimpleJob> _logger;
@@ -126,31 +133,30 @@ namespace Job
 
         public async Task Execute(IJobExecutionContext context)
         {
-            _logger.LogInformation($"Start job at {Environment.CurrentDirectory}");
-
-            await Task.CompletedTask;
-
-            _logger.LogInformation($"End job at {Environment.CurrentDirectory}");
+            _logger.LogInformation("BEGIN job {0} in group {1}", context.JobDetail.Key.Name, context.JobDetail.Key.Group);
+            var runningJobs = string.Join(",", (await context.Scheduler.GetCurrentlyExecutingJobs()).Select(j => j.JobDetail.Key.Name));
+            _logger.LogInformation("Running jobs: {0}", runningJobs);
+            await Task.Delay(12000);
+            _logger.LogInformation("END job {0} in group {1}", context.JobDetail.Key.Name, context.JobDetail.Key.Group);
         }
     }
 
-    internal class JobFactory : IJobFactory
+    public class SingletonJobFactory : IJobFactory
     {
-        protected readonly IServiceProvider Container;
-
-        public JobFactory(IServiceProvider container)
+        private readonly IServiceProvider _serviceProvider;
+        public SingletonJobFactory(IServiceProvider serviceProvider)
         {
-            Container = container;
+            _serviceProvider = serviceProvider;
         }
 
         public IJob NewJob(TriggerFiredBundle bundle, IScheduler scheduler)
         {
-            return Container.GetService(bundle.JobDetail.JobType) as IJob;
+            return _serviceProvider.GetRequiredService(bundle.JobDetail.JobType) as IJob;
         }
 
         public void ReturnJob(IJob job)
         {
             (job as IDisposable)?.Dispose();
         }
-    }
+    } 
 }
