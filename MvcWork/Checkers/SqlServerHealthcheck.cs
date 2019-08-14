@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MvcWork.Checkers
 {
-    public class SqlServerHealthcheck : IHealthCheck
+    public class SqlServerHealthCheck : IHealthCheck
     {
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -14,7 +14,7 @@ namespace MvcWork.Checkers
             {
                 try
                 {
-                    await connection.OpenAsync();
+                    await connection.OpenAsync(cancellationToken);
                 }
                 catch (Exception)
                 {

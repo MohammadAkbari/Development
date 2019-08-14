@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace MvcWork.Checkers
 {
-    public class ReadisHealthcheck : IHealthCheck
+    public class RedisHealthCheck : IHealthCheck
     {
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default(CancellationToken))
         {
-            using (ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("192.168.20.82:6379,abortConnect=false,syncTimeout=10000"))
+            using (var redis = ConnectionMultiplexer.Connect("192.168.20.82:6379,abortConnect=false,syncTimeout=10000"))
             {
                 try
                 {

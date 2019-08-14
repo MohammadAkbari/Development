@@ -24,9 +24,9 @@ namespace MvcWork
 
             services.AddHealthChecksUI()
                 .AddHealthChecks()
-                .AddCheck<SqlServerHealthcheck>("Sql")
-                .AddCheck<ReadisHealthcheck>("Redis")
-                .AddCheck<HttpHealthCheck>("Http");
+                .AddCheck<SqlServerHealthCheck>("Sql")
+                .AddCheck<RedisHealthCheck>("Redis")
+                .AddCheck<HttpHealthCheck>("Http"); 
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
